@@ -28,6 +28,10 @@ $(function() {
 
             var interval = setInterval(function() { 
                 countDown--;
+
+                lastNumber = Math.floor(Math.random()*6) + 1;
+                $('.number').text(lastNumber);
+
                 if (countDown == 0) {
                     clearInterval(interval);
                     if (lastNumber == 4) {
@@ -37,8 +41,7 @@ $(function() {
 
                     }
                 }
-                lastNumber = Math.floor(Math.random()*6) + 1;
-                $('.number').text(lastNumber);
+
 
             },100);
 
