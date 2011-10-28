@@ -1,0 +1,62 @@
+body {
+
+    font-family: sans-serif;
+
+}
+
+.container {
+
+    width: 1000px;
+    background: #FFD700;
+    border-radius: 20px;
+    padding: 30px;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+h1 {
+    float: right;
+    text-shadow: #6374AB 10px 10px 10px;
+}
+
+.number {
+    font-size: 300px;
+    text-shadow: #6374AB 10px 10px 10px;
+    float: left;
+}
+
+button.roll {
+    display: block;
+    clear: left;
+    height: 100px;
+    width: 200px;
+    font-size: 40px;
+}
+
+.users {
+
+    float: right;
+    background: white;
+    border-radius: 10px;
+    clear: right;
+    width: 500px;
+    height: 400px;
+    padding: 10px;
+
+}
+
+.current {
+    background: yellow;
+}
+
+.bier {
+    font-size: 200px;
+    background: red;
+    color: white;
+    position: absolute;
+    top: 200;
+    padding: 30px;
+    border-radius: 10px;
+    display: none;
+}
