@@ -49,4 +49,12 @@ $(function() {
             roll();
         });
 
+
+        $(document).bind("keypress", function(e) {
+            if (e.which == 32) {
+                roll();
+                e.preventDefault();
+            }
+        });
+
 });
