@@ -11,7 +11,7 @@ $(function() {
                 score : 0 
             });
             $('.newuser input').val('');
-            $('.users ul').append('<li class="user-' + username + '">' + username + ': 0</li>'); 
+            $('.users ul').append('<li class="user-' + username + '"><div class="username">' + username + '</div> <span class="score">0</span></li>'); 
 
         });
 
@@ -37,11 +37,10 @@ $(function() {
                     if (lastNumber == 4) {
                         //$('.bier').show();
                         users[currentUser].score++;
-                        $('li.user-' + users[currentUser].name).text(users[currentUser].name + ' ' + users[currentUser].score); 
+                        $('li.user-' + users[currentUser].name + ' .score').text(users[currentUser].score); 
 
                     }
                 }
-
 
             },100);
 

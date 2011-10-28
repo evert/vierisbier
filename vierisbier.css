@@ -43,7 +43,17 @@ button.roll {
     width: 500px;
     height: 400px;
     padding: 10px;
+    font-size: 200%;
 
+}
+.users ul {
+    list-style: none;
+}
+
+.users .username {
+    float: left;
+    clear : left;
+    width: 350px;
 }
 
 .current {
