@@ -23,6 +23,8 @@ $(function() {
 
         var roll = function() {
 
+            $('body').removeClass("bier");
+
             currentUser++;
             if (currentUser >= users.length) currentUser = 0;
 

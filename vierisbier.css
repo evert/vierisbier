@@ -32,26 +32,23 @@ h1 {
     text-align: center;
     color: rgba(0,0,0,.9);
     font-weight: 800;
-    -webkit-transform: scale(1);
-    -moz-transform: scale(1);
-    transform: scale(1);
+    -webkit-transform: scale(1) rotate(0deg);
+    -moz-transform: scale(1) rotate(0deg);
+    transform: scale(1) rotate(0deg);
     transition: all .5s;
 }
 
 .rolling .number {
-    -webkit-transform: scale(0.5);
-    -moz-transform: scale(0.5);
-    transform: scale(0.5);
+    -webkit-transform: scale(0.5) rotate(0deg);
+    -moz-transform: scale(0.5) rotate(0deg);;
+    transform: scale(0.5) rotate(0deg);
     transition: all .2s;
 }
 
 .bier .number {
-    -webkit-transform: rotate(720deg);
-    -moz-transform: rotate(720deg);
-    transform: rotate(780deg);
-    -webkit-transform: scale(1.5);
-    -moz-transform: scale(1.5);
-    transform: scale(1.5);
+    -webkit-transform: scale(1.5) rotate(720deg);
+    -moz-transform: scale(1.5) rotate(720deg);
+    transform: scale(1.5) rotate(720deg);
     transition: all .5s;
 }
 
