@@ -10,7 +10,7 @@ $(function(){
       defaults: function()
       {
           return {
-              name: "Add player..",
+              name: "Player name..",
               order: Players.nextOrder(),
               done: false,
               score: 0
@@ -99,6 +99,7 @@ $(function(){
     render: function()
     {
         this.$el.html(this.template(this.model.toJSON()));
+
         this.$el.toggleClass('done', this.model.get('done'));
         this.input = this.$('.edit');
         return this;
@@ -125,7 +126,7 @@ $(function(){
         {
             this.clear();
         } else {
-            this.model.save({title: value});
+            this.model.save({name: value});
             this.$el.removeClass("editing");
         }
     },
@@ -193,7 +194,7 @@ $(function(){
         this.footer.show();
         this.footer.html(this.statsTemplate({done: done, remaining: remaining}));
       } else {
-        this.main.hide();
+        //this.main.hide();
         this.footer.hide();
       }
 
@@ -220,7 +221,7 @@ $(function(){
       if (e.keyCode != 13) return;
       if (!this.input.val()) return;
 
-      Players.create({title: this.input.val()});
+      Players.create({name: this.input.val()});
       this.input.val('');
     },
 

@@ -1,77 +1,79 @@
 <head>
     <title>Vier is Bier</title>
 
+    <link rel="stylesheet" href="css/vierisbier.css" type="text/css" />
+<!--
+--> 
+    <link rel="stylesheet" href="css/game.css" type="text/css" />
     <script type="text/javascript" src="js/libs/jquery-1.10.2.min.js"></script>
     <script type="text/javascript" src="js/libs/underscore-min.js"></script>
     <script type="text/javascript" src="js/libs/backbone-min.js"></script>
     <script type="text/javascript" src="js/libs/backbone.localStorage.js"></script>
     <script type="text/javascript" src="js/game.js"></script>
-
-    <!-- <script type="text/javascript" src="js/vierisbier.js"></script> 
-    <link rel="stylesheet" href="css/vierisbier.css" type="text/css" />-->
-
-    <link rel="stylesheet" href="css/game.css" type="text/css" />
+    <script type="text/javascript" src="js/vierisbier.js"></script> 
+    
 </head>
 
 
 <body class="init">
 
-    <div id="vierisbierapp">
+    <div class="container" id="vierisbierapp">
 
-    <header>
-        <h1>Players</h1>
-        <input id="new-todo" type="text" placeholder="Add player..">
-    </header>
+        <header>
+            
+            <!-- <input id="new-todo" type="text" placeholder="Player name.."> -->
+        </header>
 
-    <section id="main">
-        <input id="toggle-all" type="checkbox">
-        <label for="toggle-all">Mark all as complete</label>
-        <ul id="todo-list"></ul>
-    </section>
+        <section id="main">
+            <input id="toggle-all" type="checkbox">
+            <label for="toggle-all">Mark all as complete</label>
+            <!--<ul id="todo-list"></ul>-->
+           
+            <section class="game-board">
+                <h4 class="game-round">Round: <span class="count">0</span></h4>
+                <div class="dice-number">4</div>
+            </section>
 
-    <footer>
-        <a id="clear-completed">Clear completed</a>
-        <div id="todo-count"></div>
-    </footer>
+            <div class="score-card">
+                <h1>Vier is bier!</h1>
+
+                <div class="new-user">
+                    <input id="new-todo" type="text" name="username" placeholder="Add player.." value="Player name"/>
+                    <button type="submit" tabindex="-1" />+</button>
+                </div>
+                
+
+                <br style="clear:both" />
+
+                <ol id="todo-list"> 
+
+                </ol>
+                <button class="play">PLAY</button>
+            </div>
+
+        </section>
+
+        <footer>
+            <a id="clear-completed">Clear completed</a>
+            <div id="todo-count"></div>
+        </footer>
 
     </div>
 
     <div id="instructions">
-        Double-click to edit a todo.
     </div>
 
-    <div class="container">
-        <section class="game-board">
-            <h4 class="game-round">Round: <span class="count">0</span></h4>
-            <div class="dice-number">4</div>
-        </section>
 
-        <div class="score-card">
-            <h1>Vier is bier!</h1>
-            
-            <ol>
-
-            </ol>
-
-            <div class="new-user">
-                <input type="text" name="username" placeholder="Add player.." value="Player name"/>
-                <button type="submit" tabindex="-1" />+</button>
-            </div>
-            <button class="play">PLAY</button>
-        </div>
-
-        <br style="clear:both" />
-    </div>
 
     <!-- Templates -->
 
     <script type="text/template" id="player-template">
         <div class="view">
             <input class="toggle" type="checkbox" <%= done ? 'checked="checked"' : '' %> />
-            <label><%- title %></label>
+            <label><%= name %> <span class="score"><%= score %></span></label>
             <a class="destroy"></a>
         </div>
-        <input class="edit" type="text" value="<%- title %>" />
+        <input class="edit" type="text" value="<%=  name %>" />
     </script>
 
     <script type="text/template" id="stats-template">

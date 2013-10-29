@@ -12,12 +12,14 @@ $(function() {
                     score : 0
                 });
                 
-                $('.score-card ol').append('<li class="user user-' + username + '">' + username + '<span class="score">0</span></li>'); 
+                $('.score-card ol').append('<li class="user user-' + username + '">' + username + '</li>'); 
             }
 
             $('.new-user').focus();            
             $('body').removeClass("init");        
         };
+
+
 
         var roll = function() {
             $('body').toggleClass("rolling");
