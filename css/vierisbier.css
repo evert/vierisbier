@@ -3,11 +3,9 @@
 
 body {
     font-family: sans-serif;
-    background: #8e4f05;
-    background: #8e4f05 url("images/wood-texture.jpg") center bottom repeat;
+    background: #8e4f05 url("../images/wood-texture.jpg") center bottom repeat;
     margin: 0;
     padding: 0;
-    transition: background 1.5s;
 }
 
 .container {
@@ -80,19 +78,18 @@ h1 {
     transition: all .5s;
 }
 
-button.roll {
-    float: right;
-    padding: 0.5ex 1em;
-    width: inherit;
-    font-size: 1em;
-    margin: -0.5ex auto;
-}
+button {
+    background: black;
+    border: none;
+    border-radius: 0.5ex;
+    color: white;
+} 
 
 .users {
     
     min-height: 400px;
     min-width: 400px;
-    background: #efeacd url(images/paper.jpg) center -58px repeat-y;
+    background: #efeacd url("../images/paper.jpg") center -58px repeat-y;
     padding: 0;
     font-size: 200%;
     font-family: 'Gochi Hand';
