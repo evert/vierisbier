@@ -1,14 +1,44 @@
 <head>
     <title>Vier is Bier</title>
 
-    <script type="text/javascript" src="js/libs/jquery-1.6.4.min.js"></script>
-    <script type="text/javascript" src="js/vierisbier.js"></script>
+    <!-- <script type="text/javascript" src="js/libs/json2.js"></script> -->
+    <script type="text/javascript" src="js/libs/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="js/libs/underscore-min.js"></script>
+    <script type="text/javascript" src="js/libs/backbone-min.js"></script>
+    <script type="text/javascript" src="js/libs/backbone.localStorage.js"></script>
+    <script type="text/javascript" src="js/todos.js"></script>
+    <!-- <script type="text/javascript" src="js/vierisbier.js"></script> -->
     
     <link rel="stylesheet" href="css/vierisbier.css" type="text/css" />
+    <link rel="stylesheet" href="css/todos.css" type="text/css" />
 </head>
 
 
 <body class="init">
+
+    <div id="todoapp">
+
+    <header>
+        <h1>Todos</h1>
+        <input id="new-todo" type="text" placeholder="What needs to be done?">
+    </header>
+
+    <section id="main">
+        <input id="toggle-all" type="checkbox">
+        <label for="toggle-all">Mark all as complete</label>
+        <ul id="todo-list"></ul>
+    </section>
+
+    <footer>
+        <a id="clear-completed">Clear completed</a>
+        <div id="todo-count"></div>
+    </footer>
+
+    </div>
+
+    <div id="instructions">
+        Double-click to edit a todo.
+    </div>
 
     <div class="container">
         <section class="game-board">
@@ -32,5 +62,23 @@
 
         <br style="clear:both" />
     </div>
+
+    <!-- Templates -->
+
+    <script type="text/template" id="item-template">
+        <div class="view">
+            <input class="toggle" type="checkbox" <%= done ? 'checked="checked"' : '' %> />
+            <label><%- title %></label>
+            <a class="destroy"></a>
+        </div>
+        <input class="edit" type="text" value="<%- title %>" />
+    </script>
+
+    <script type="text/template" id="stats-template">
+    <% if (done) { %>
+        <a id="clear-completed">Clear <%= done %> completed <%= done == 1 ? 'item' : 'items' %></a>
+    <% } %>
+        <div class="todo-count"><b><%= remaining %></b> <%= remaining == 1 ? 'item' : 'items' %> left</div>
+    </script>
 
 </body>
