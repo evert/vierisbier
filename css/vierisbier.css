@@ -90,25 +90,6 @@ li {
     transition: all .25s;
 }
 
-.score-card .new-user input {
-    height: 75px;
-    border-width: 0 0 2px 0;
-    border-style: dotted;
-    border-color: rgba(0,0,0,0.4);
-    background: transparent;
-    font-family: "Gloria Hallelujah";
-    color: rgb(6, 18, 65);
-    margin: 0 0 0 220px;
-}
-
-.score-card input,
-.score-card button {
-    font-size: 20px;
-    line-height: 40px;
-    padding: 5px 20px;
-    margin: 10px 10px;
-}
-
 .score-card li {
     padding: 0 1em;
     color: rgba(18, 60, 122, 0.99);
@@ -128,10 +109,44 @@ li {
     float: right;
 }
 
-.score-card .hide input {
+.new-user {
+    margin: 0 0 0 220px;
+}
+
+.new-user input {
+    height: 75px;
+    border-width: 0 0 2px 0;
+    border-style: dotted;
+    border-color: rgba(0,0,0,0.4);
+    background: transparent;
+    font-family: "Gloria Hallelujah";
+    color: rgb(6, 18, 65);
+    
+}
+
+.score-card input,
+.score-card button {
+    font-size: 20px;
+    line-height: 40px;
+    padding: 5px 20px;
+    margin: 10px 10px;
+}
+
+.new-user button {
+    opacity: 0;
+    transition: all .2s;
+}
+
+.new-user.minimized input {
     width: 0;
     padding: 5px 0;
     opacity: 0;
+    border: none;
+    transition: all .7s;
+}
+
+.new-user.minimized button {
+    opacity: 1;
     transition: all .2s;
 }
 

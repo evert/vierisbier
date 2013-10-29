@@ -20,7 +20,7 @@ $(function() {
         };
 
         var roll = function() {
-
+            $('body').toggleClass("rolling");
             $('body').removeClass("bier");
 
             currentUser++;
@@ -60,19 +60,20 @@ $(function() {
         };
 
         $('.new-user button').bind('click', function(){
-            addUser();
+            $('.new-user input').focus();
+            $('.new-user').removeClass('minimized');
         });
 
-        $('button.roll').click(function() {
-            roll();
-            $('body').toggleClass("rolling");
+        $('button.play').click(function() {
+            $('.new-user').addClass('minimized'); 
         });
 
         $(document).keyup(function(e) {
 
             if (e.keyCode == 27) { 
                 if ($(".new-user input").is(":focus")) {
-                    $('.new-user input').blur();    
+                    $('.new-user input').blur();
+                    $('.new-user').addClass('minimized');
                 }
 
             }   
