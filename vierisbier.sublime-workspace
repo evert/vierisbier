@@ -5,7 +5,23 @@
 		[
 			[
 				"pa",
-				"padding-top"
+				"padding"
+			],
+			[
+				"im",
+				"images"
+			],
+			[
+				"font-",
+				"font-family"
+			],
+			[
+				"p",
+				"preventDefault"
+			],
+			[
+				"add",
+				"addUser"
 			],
 			[
 				"svg",
@@ -26,10 +42,6 @@
 			[
 				"tex",
 				"text-transform"
-			],
-			[
-				"font-",
-				"font-variant"
 			],
 			[
 				"back",
@@ -371,7 +383,23 @@
 			"file": "index.html",
 			"settings":
 			{
-				"buffer_size": 818,
+				"buffer_size": 895,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "vierisbier.css",
+			"settings":
+			{
+				"buffer_size": 3627,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "vierisbier.js",
+			"settings":
+			{
+				"buffer_size": 2669,
 				"line_ending": "Unix"
 			}
 		}
@@ -560,6 +588,12 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"efeacd",
+			"game",
+			"5px",
+			"back",
+			"number",
+			"game",
 			"name",
 			"test",
 			"300",
@@ -681,13 +715,7 @@
 			"@media",
 			"#0088cc",
 			"warning",
-			"setting",
-			"master",
-			"selecto",
-			"topics",
-			"settings",
-			"<li class=\"well\">",
-			">\n"
+			"setting"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -739,7 +767,7 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 1,
 			"sheets":
 			[
 				{
@@ -747,15 +775,15 @@
 					"file": "index.html",
 					"settings":
 					{
-						"buffer_size": 818,
+						"buffer_size": 895,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								321,
+								321
 							]
 						],
 						"settings":
@@ -766,6 +794,62 @@
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "vierisbier.css",
+					"settings":
+					{
+						"buffer_size": 3627,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								679,
+								679
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CSS/CSS.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "vierisbier.js",
+					"settings":
+					{
+						"buffer_size": 2669,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1845,
+								1845
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 228.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
