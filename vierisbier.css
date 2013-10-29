@@ -23,9 +23,9 @@ h1 {
     text-align: left;
     background: #efeacd url("images/paper.jpg") right -135px;
     text-shadow: rgba(255,255,255, 0.4) 0px 1px 0px;
-    /* text-align: center; */
-    color: rgba(0,0,0,.9);
-    /* text-align: center; */
+    
+    color: #de3e3d;
+    text-shadow: 0px 2px 0px white, 0px 4px 1px rgba(0,0,0,0.4);
     font-family: 'Piedra';
     box-shadow: 0px 1px 7px black;
     margin: 0;
@@ -131,7 +131,7 @@ button.roll {
 
 .users ul li.current {
     color: rgba(0,0,0,0.8);
-    margin-left: 2em;
+    margin-left: 1em;
     transition: all .25s;
 }
 
@@ -181,5 +181,6 @@ body.init {
 .bier .current {
     -webkit-transform: scale(1.2);
     text-shadow: 13px 11px 9px rgba(0,0,0,0.5)!important;
+    margin-left: 2em!important;
     transition: all .5s;
 }
