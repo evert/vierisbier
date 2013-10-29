@@ -2,32 +2,33 @@ $(function() {
 
         var users = [];
         var currentUser = -1;
+        var gameRound = 1;
 
-
-
-        $('.newuser button').bind('click', function(){
-
+        var addUser = function() {
             var username = $('.new-user').val();
             if (username !== "") {
                 users.push({
                     name: username,
-                    score : 0 
+                    score : 0
                 });
                 $('.newuser input').val('');
                 $('.users ul').append('<li class="user-' + username + '"><div class="username">' + username + '</div> <span class="score">0</span></li>'); 
             }
 
             $('.new-user').focus();            
-
-        });
+            $('body').removeClass("init");        
+        };
 
         var roll = function() {
 
             $('body').removeClass("bier");
 
             currentUser++;
-            if (currentUser >= users.length) currentUser = 0;
-
+            if (currentUser >= users.length) {
+                currentUser = 0;
+                gameRound++;
+            }
+            $('.game-round .count').text(gameRound).toString();
             var countDown = 10;
             var lastNumber = 0;
 
@@ -38,7 +39,7 @@ $(function() {
                 countDown--;
 
                 lastNumber = Math.floor(Math.random()*6) + 1;
-                $('.number').text(lastNumber);
+                $('.dice-number').text(lastNumber);
 
                 if (countDown == 0) {
                     $('body').removeClass("rolling");
@@ -53,10 +54,14 @@ $(function() {
                 
                 }                
 
-            },200);
+            },80);
 
 
         };
+
+        $('.newuser button').bind('click', function(){
+            addUser();
+        });
 
         $('button.roll').click(function() {
             roll();
@@ -65,11 +70,17 @@ $(function() {
 
         $(document).bind("keypress", function(e) {
                 if (e.which == 32) {
-                    if ($(".new-user").is(":focus")) {
+                    if ($(".new-user").is(":focus") || $("button.roll").is(":focus") ) {
                         return;
                     }
                     roll();
                     e.preventDefault();
+                }
+                if (e.which == 13) {
+                    if ($(".new-user").is(":focus")) {
+                        addUser();
+                        e.preventDefault();
+                    }
                 }
             
         });
