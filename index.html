@@ -3,7 +3,7 @@
 
     <script type="text/javascript" src="js/libs/jquery-1.6.4.min.js"></script>
     <script type="text/javascript" src="js/vierisbier.js"></script>
-    
+
     <link rel="stylesheet" href="css/vierisbier.css" type="text/css" />
 </head>
 
@@ -16,21 +16,25 @@
             <div class="dice-number">4</div>
         </section>
 
-        <div class="users">
+        <div class="score-card">
             <h1>Vier is bier!</h1>
-            <ul>
+            
+            <ol>
+               
+            </ol>
 
-            </ul>
-
-            <div class="newuser">
-                <input type="text" name="username" class="new-user" placeholder="Add player.." />
-                <button type="submit" />Add</button>
-                <button class="roll">PLAY</button>
+            <div class="new-user">
+                <input type="text" name="username" placeholder="Add player.." />
+                <button type="submit" />+</button>
             </div>
-
+            <button class="roll">PLAY</button>
         </div>
 
         <br style="clear:both" />
     </div>
-
+    <script type="text/javascript">
+    $( document ).ready(function(){
+        $(".new-user input").focus();
+    })
+    </script>
 </body>

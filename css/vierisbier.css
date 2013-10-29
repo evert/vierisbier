@@ -14,20 +14,33 @@ body {
     padding: 1% 4%;
     margin: 30px auto 0;
     height: 100%;
-
 }
 
 h1 {
     text-align: center;
-    /* background: #efeacd url("images/paper.jpg") right -135px; */
-    /* text-shadow: rgba(255,255,255, 0.4) 0px 1px 0px; */
-    
     color: rgba(0,0,0,.8);
-   
     font-family: 'Gloria Hallelujah';
-    box-shadow: inset 0px -9px 17px rgba(0,0,0,0.3);
     margin: 0;
-    padding: 0.5ex;
+    padding: 48px 0 0 0;
+    line-height: 80px;
+}
+
+button {
+    background: black;
+    border: none;
+    border-radius: 0.5ex;
+    color: white;
+    transition: all .2s;
+} 
+
+ol {
+    padding: 0 180px;
+    margin: 0;
+    list-style-position: outside;
+}
+
+li {
+    padding-left: 50px;
 }
 
 .game-board {
@@ -64,32 +77,11 @@ h1 {
     margin: 0.1ex auto 0;
 }
 
-.rolling .dice-number {
-    -webkit-transform: scale(0.5) rotate(0deg);
-    -moz-transform: scale(0.5) rotate(0deg);;
-    transform: scale(0.5) rotate(0deg);
-    transition: all .2s;
-}
 
-.bier .dice-number {
-    -webkit-transform: scale(1.5) rotate(720deg);
-    -moz-transform: scale(1.5) rotate(720deg);
-    transform: scale(1.5) rotate(720deg);
-    transition: all .5s;
-}
-
-button {
-    background: black;
-    border: none;
-    border-radius: 0.5ex;
-    color: white;
-} 
-
-.users {
-    
+.score-card {
     min-height: 400px;
     min-width: 400px;
-    background: #efeacd url("../images/paper.jpg") center -58px repeat-y;
+    background: #efeacd url("../images/paper.jpg");
     padding: 0;
     font-size: 200%;
     font-family: 'Gochi Hand';
@@ -98,7 +90,7 @@ button {
     transition: all .25s;
 }
 
-.users .new-user {
+.score-card .new-user input {
     height: 75px;
     border-width: 0 0 2px 0;
     border-style: dotted;
@@ -106,41 +98,41 @@ button {
     background: transparent;
     font-family: "Gloria Hallelujah";
     color: rgb(6, 18, 65);
+    margin: 0 0 0 220px;
 }
 
-.users .newuser input,
-.users .newuser button {
+.score-card input,
+.score-card button {
     font-size: 20px;
     line-height: 40px;
     padding: 5px 20px;
     margin: 10px 10px;
 }
 
-.users ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
-.users ul li {
+.score-card li {
     padding: 0 1em;
-    color: rgba(0,0,0,0.3);
+    color: rgba(18, 60, 122, 0.99);
     height: 85px;
     line-height: 78px;
     text-shadow: none;
     transition: all .25s;
 }
 
-.users ul li.current {
+.score-card .current {
     color: rgba(0,0,0,0.8);
     margin-left: 1em;
     transition: all .25s;
 }
 
-.users .username {
-    float: left;
-    clear : left;
-    width: 80%;
+.score-card .user .score {
+    float: right;
+}
+
+.score-card .hide input {
+    width: 0;
+    padding: 5px 0;
+    opacity: 0;
+    transition: all .2s;
 }
 
 /* Extra small devices (phones, up to 480px) */
@@ -162,13 +154,23 @@ button {
         width: 60%;
         float: left;
     }
-    .users {
+    .score-card {
         width: 35%;
         float: right;
     }
 }
 
 /* Screen transitions */
+
+button:focus {
+    background: #B63333;
+    transition: all .2s;
+}
+
+.score-card .new-user input:focus {
+    outline: none;
+    color: rgb(207, 20, 20);
+}
 
 body .game-board {
     -webkit-filter: blur(0px);
@@ -198,5 +200,19 @@ body.bier .game-board {
     -webkit-transform: scale(1.2);
     text-shadow: 13px 11px 9px rgba(0,0,0,0.5)!important;
     margin-left: 2em!important;
+    transition: all .5s;
+}
+
+.rolling .dice-number {
+    -webkit-transform: scale(0.5) rotate(0deg);
+    -moz-transform: scale(0.5) rotate(0deg);;
+    transform: scale(0.5) rotate(0deg);
+    transition: all .2s;
+}
+
+.bier .dice-number {
+    -webkit-transform: scale(1.5) rotate(720deg);
+    -moz-transform: scale(1.5) rotate(720deg);
+    transform: scale(1.5) rotate(720deg);
     transition: all .5s;
 }

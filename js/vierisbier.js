@@ -5,14 +5,14 @@ $(function() {
         var gameRound = 1;
 
         var addUser = function() {
-            var username = $('.new-user').val();
+            var username = $('.new-user input').val();
             if (username !== "") {
                 users.push({
                     name: username,
                     score : 0
                 });
-                $('.newuser input').val('');
-                $('.users ul').append('<li class="user-' + username + '"><div class="username">' + username + '</div> <span class="score">0</span></li>'); 
+                
+                $('.score-card ol').append('<li class="user user-' + username + '">' + username + '<span class="score">0</span></li>'); 
             }
 
             $('.new-user').focus();            
@@ -32,7 +32,7 @@ $(function() {
             var countDown = 10;
             var lastNumber = 0;
 
-            $('.users li').removeClass('current');
+            $('.score-card li').removeClass('current');
             $('li.user-' + users[currentUser].name).addClass('current');
 
             var interval = setInterval(function() { 
@@ -59,7 +59,7 @@ $(function() {
 
         };
 
-        $('.newuser button').bind('click', function(){
+        $('.new-user button').bind('click', function(){
             addUser();
         });
 
@@ -68,7 +68,29 @@ $(function() {
             $('body').toggleClass("rolling");
         });
 
+        $(document).keyup(function(e) {
+
+            if (e.keyCode == 27) { 
+                if ($(".new-user input").is(":focus")) {
+                    $('.new-user input').blur();    
+                }
+
+            }   
+
+            if (e.keyCode == 13) {
+                    if ($(".new-user input").is(":focus")) {
+                        addUser();
+                        e.preventDefault();
+                    } else {
+                        roll();
+                        e.preventDefault();
+                    }
+                }
+        
+        });
+
         $(document).bind("keypress", function(e) {
+            
                 if (e.which == 32) {
                     if ($(".new-user").is(":focus") || $("button.roll").is(":focus") ) {
                         return;
@@ -76,16 +98,8 @@ $(function() {
                     roll();
                     e.preventDefault();
                 }
-                if (e.which == 13) {
-                    if ($(".new-user").is(":focus")) {
-                        addUser();
-                        e.preventDefault();
-                    }
-                }
+                
             
         });
-
-        $(".new-user").focus();
-
 
 });
