@@ -222,7 +222,7 @@ body.bier .game-board {
 
 .rolling .dice-number {
     -webkit-transform: scale(0.5) rotate(0deg);
-    -moz-transform: scale(0.5) rotate(0deg);;
+    -moz-transform: scale(0.5) rotate(0deg);
     transform: scale(0.5) rotate(0deg);
     transition: all .2s;
 }

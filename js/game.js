@@ -19,6 +19,9 @@ $(function(){
       // Play a round
       roll: function()
       {
+            // set round number
+            this.set('round', this.get('round') + 1);
+            $('.game-round .count').text(this.get('round'));
             // go to next player
             var player = Players.at(this.get('currentUser'));
             this.set('currentUser', this.get('currentUser') + 1);
@@ -39,28 +42,22 @@ $(function(){
                     // this.$el.removeClass("rolling");
                     clearInterval(interval);
                     
-                        if (lastNumber == 4) {
+                    if (lastNumber == 4) {
+                    
+                        // hoera
                         
-                            // hoera
-                            this.$el.toggleClass("bier");
+                        $('.container').toggleClass('bier')
                         
-                            // user points + 1
-                            console.warn("the dice says: " + lastNumber);
-                            player.set("score", player.get("score") + 1);
-                            player.save({"score": player.get("score") });
-                        } else {
-                            // tough luck
-                            console.log("the dice says: " + lastNumber);
-                        }
-
-                        // go to next round
-                        this.set('round', this.get('round') + 1);
+                        // user points + 1
+                        
+                        player.set("score", player.get("score") + 1);
+                        player.save({"score": player.get("score") });
+                    } 
 
                 }
                 
             }, this), 80);
 
-       
       }
 
   });

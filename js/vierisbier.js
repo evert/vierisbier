@@ -31,6 +31,7 @@ $(function() {
                 gameRound++;
             }
             $('.game-round .count').text(gameRound).toString();
+            
             var countDown = 10;
             var lastNumber = 0;
 
