@@ -1,6 +1,71 @@
 // Load the application once the DOM is ready, using `jQuery.ready`:
 $(function(){
 
+  // Game Model
+  // ------------
+
+  var Game = Backbone.Model.extend({
+
+      // Default attributes for the game.
+      defaults: function()
+      {
+          return {
+              name: "Game name..",
+              round: 0,
+              currentUser: 0
+          };
+      },
+
+      // Play a round
+      roll: function()
+      {
+            // go to next player
+            var player = Players.at(this.get('currentUser'));
+            this.set('currentUser', this.get('currentUser') + 1);
+
+            if (this.get('currentUser') >= Players.length) {
+                 this.set('currentUser', 0);
+            }
+
+            var countDown = 10;
+            var lastNumber;
+            var interval = setInterval(_.bind(function() { 
+                countDown--;
+
+                lastNumber = Math.floor(Math.random()*6) + 1;
+                $('.dice-number').text(lastNumber);
+
+                if (countDown == 0) {
+                    // this.$el.removeClass("rolling");
+                    clearInterval(interval);
+                    
+                        if (lastNumber == 4) {
+                        
+                            // hoera
+                            this.$el.toggleClass("bier");
+                        
+                            // user points + 1
+                            console.warn("the dice says: " + lastNumber);
+                            player.set("score", player.get("score") + 1);
+                            player.save({"score": player.get("score") });
+                        } else {
+                            // tough luck
+                            console.log("the dice says: " + lastNumber);
+                        }
+
+                        // go to next round
+                        this.set('round', this.get('round') + 1);
+
+                }
+                
+            }, this), 80);
+
+       
+      }
+
+  });
+
+
   // Player Model
   // ------------
 
@@ -153,7 +218,7 @@ $(function(){
 
     // Instead of generating a new element, bind to the existing skeleton of
     // the App already present in the HTML.
-    el: $("#vierisbierapp"),
+    el: $("body"),
 
     // Our template for the line of statistics at the bottom of the app.
     statsTemplate: _.template($('#stats-template').html()),
@@ -161,8 +226,11 @@ $(function(){
     // Delegated events for creating new items, and clearing completed ones.
     events: {
       "keypress #new-todo":       "createOnEnter",
+      "keypress":                   "createOnSpace",
       "click #clear-completed":   "clearCompleted",
-      "click #toggle-all":        "toggleAllComplete"
+      "click #toggle-all":        "toggleAllComplete",
+      "click .play":              "playRound",
+
     },
 
     // At initialization we bind to the relevant events on the Players
@@ -172,6 +240,7 @@ $(function(){
 
       this.input = this.$("#new-todo");
       this.allCheckbox = this.$("#toggle-all")[0];
+      
 
       this.listenTo(Players, 'add', this.addOne);
       this.listenTo(Players, 'reset', this.addAll);
@@ -180,25 +249,31 @@ $(function(){
       this.footer = this.$('footer');
       this.main = $('#main');
 
+      this.game = new Game();
+
       Players.fetch();
     },
 
     // Re-rendering the App just means refreshing the statistics -- the rest
     // of the app doesn't change.
-    render: function() {
-      var done = Players.done().length;
-      var remaining = Players.remaining().length;
+    render: function()
+    {
+        var done = Players.done().length;
+        var remaining = Players.remaining().length;
 
-      if (Players.length) {
-        this.main.show();
-        this.footer.show();
-        this.footer.html(this.statsTemplate({done: done, remaining: remaining}));
-      } else {
-        //this.main.hide();
-        this.footer.hide();
-      }
+        if (Players.length)
+        {
+            this.main.show();
+            this.footer.show();
+            this.footer.html(this.statsTemplate({done: done, remaining: remaining}));
+        }
+        else
+        {
+            //this.main.hide();
+            this.footer.hide();
+        }
 
-      this.allCheckbox.checked = !remaining;
+        this.allCheckbox.checked = !remaining;
     },
 
     // Add a single player to the list by creating a view for it, and
@@ -213,6 +288,8 @@ $(function(){
     addAll: function()
     {
       Players.each(this.addOne, this);
+
+
     },
 
     // If you hit return in the main input field, create new Player model,
@@ -223,6 +300,23 @@ $(function(){
 
       Players.create({name: this.input.val()});
       this.input.val('');
+    },
+
+    // If you hit spacebar, play new round
+    createOnSpace: function(e) 
+    {
+        if($('#new-todo').is(":focus")){
+            return;
+        } 
+        if (e.keyCode == 32) { 
+            this.playRound(e);
+        }
+    },
+
+    // If you click the play button, play new round
+    playRound: function(e)
+    {
+        this.game.roll();
     },
 
     // Clear all players, destroying their models.

@@ -98,6 +98,7 @@ li {
     line-height: 78px;
     text-shadow: none;
     transition: all .25s;
+    position: relative;
 }
 
 .score-card .current {
@@ -106,7 +107,7 @@ li {
     transition: all .25s;
 }
 
-.score-card .user .score {
+.score {
     float: right;
 }
 
@@ -114,7 +115,7 @@ li {
     margin: 0 0 0 220px;
 }
 
-.new-user input {
+.score-card input {
     height: 75px;
     border-width: 0 0 2px 0;
     border-style: dotted;
@@ -130,7 +131,7 @@ li {
     font-size: 20px;
     line-height: 40px;
     padding: 5px 20px;
-    margin: 10px 10px;
+    margin: 0 10px 10px;
 }
 
 .new-user button {
@@ -208,7 +209,7 @@ body.bier .game-board {
 
 .init .game-board {
     height: 0;
-    opacity: 0.0;
+    /* opacity: 0.0; */
     transition: all 0;
 }
 

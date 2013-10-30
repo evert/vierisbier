@@ -3,6 +3,7 @@
 
     <link rel="stylesheet" href="css/vierisbier.css" type="text/css" />
 <!--
+    <script type="text/javascript" src="js/vierisbier.js"></script> 
 --> 
     <link rel="stylesheet" href="css/game.css" type="text/css" />
     <script type="text/javascript" src="js/libs/jquery-1.10.2.min.js"></script>
@@ -10,7 +11,6 @@
     <script type="text/javascript" src="js/libs/backbone-min.js"></script>
     <script type="text/javascript" src="js/libs/backbone.localStorage.js"></script>
     <script type="text/javascript" src="js/game.js"></script>
-    <script type="text/javascript" src="js/vierisbier.js"></script> 
     
 </head>
 
@@ -18,11 +18,6 @@
 <body class="init">
 
     <div class="container" id="vierisbierapp">
-
-        <header>
-            
-            <!-- <input id="new-todo" type="text" placeholder="Player name.."> -->
-        </header>
 
         <section id="main">
             <input id="toggle-all" type="checkbox">
@@ -38,16 +33,13 @@
                 <h1>Vier is bier!</h1>
 
                 <div class="new-user">
-                    <input id="new-todo" type="text" name="username" placeholder="Add player.." value="Player name"/>
+                    <input id="new-todo" type="text" name="username" placeholder="Add player.." value=""/>
                     <button type="submit" tabindex="-1" />+</button>
                 </div>
-                
-
-                <br style="clear:both" />
 
                 <ol id="todo-list"> 
-
                 </ol>
+
                 <button class="play">PLAY</button>
             </div>
 
@@ -78,14 +70,10 @@
 
     <script type="text/template" id="stats-template">
     <% if (done) { %>
-        <a id="clear-completed">Clear <%= done %> completed <%= done == 1 ? 'item' : 'items' %></a>
+        <a id="clear-completed">Clear <%= done %> completed <%= done == 1 ? 'player' : 'player' %></a>
     <% } %>
-        <div class="todo-count"><b><%= remaining %></b> <%= remaining == 1 ? 'item' : 'items' %> left</div>
+        <div class="todo-count"><b><%= remaining %></b> <%= remaining == 1 ? 'player' : 'players' %></div>
     </script>
 
-    <script type="text/javascript">
-    $( document ).ready(function(){
-        $(".new-user input").focus();
-    })
-    </script>
+
 </body>
