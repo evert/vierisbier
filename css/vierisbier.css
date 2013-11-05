@@ -3,7 +3,8 @@
 
 body {
     font-family: sans-serif;
-    background: #8e4f05 url("../images/wood-texture.jpg") center bottom repeat;
+    background: #8e4f05 url("../images/wood-texture.jpg") left top no-repeat;
+    background-size: cover;
     margin: 0;
     padding: 0;
 }
