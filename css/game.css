@@ -46,6 +46,10 @@ body {
 	text-decoration: line-through;
 }
 
+#todo-list li.paused label {
+	color: #aaaaaa;
+}
+
 #todo-list .destroy {
 	position: absolute;
 	left: -35px;
