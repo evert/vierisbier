@@ -162,8 +162,9 @@ body {
 	top: 1px;
 }
 
-#todo-count span {
+.player-count {
 	font-weight: bold;
+	color: white;
 }
 
 #instructions {

@@ -190,13 +190,19 @@ $(function()
         // Filter down the list of all players that are finished.
         done: function()
         {
-            return this.where({done: true});
+            return this.where({
+                done: true,
+                paused: false
+            });
         },
 
         // Filter down the list to only players that are still not finished.
         remaining: function()
         {
-            return this.where({done: false});
+            return this.where({
+                done: false,
+                paused: false
+            });
         },
 
         // We keep the players in sequential order, despite being saved by unordered
@@ -482,6 +488,7 @@ $(function()
         {
             var done = this.collection.done().length;
             var remaining = this.collection.remaining().length;
+
 
             if (this.collection.length)
             {

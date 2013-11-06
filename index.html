@@ -65,7 +65,7 @@
 
         <footer>
             <a id="clear-completed">Clear completed</a>
-            <div id="todo-count"></div>
+            <div id="player-count"></div>
         </footer>
 
     </div>
@@ -92,7 +92,7 @@
     <% if (done) { %>
         <a id="clear-completed">Clear <%= done %> completed <%= done == 1 ? 'player' : 'player' %></a>
     <% } %>
-        <div class="todo-count"><b><%= remaining %></b> <%= remaining == 1 ? 'player' : 'players' %></div>
+        <div class="player-count"><b><%= remaining %></b> <%= remaining == 1 ? 'player' : 'players' %></div>
     </script>
 
 
