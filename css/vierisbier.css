@@ -3,11 +3,12 @@
 
 body {
     font-family: sans-serif;
-    background: #8e4f05 url("../images/wood-texture.jpg") left top no-repeat;
+    background: #8e4f05 url("../images/wood-texture.jpg") no-repeat;
     background-size: cover;
     margin: 0;
     padding: 0;
     cursor: default;
+    background-position: -100px 0;
 }
 
 .container {
@@ -23,7 +24,7 @@ h1 {
     color: rgba(0,0,0,.8);
     font-family: 'Gloria Hallelujah', sans-serif;
     margin: 0;
-    padding: 48px 0 0 0;
+    padding: 18px 0 0 0;
     line-height: 80px;
 }
 
@@ -49,16 +50,27 @@ li {
     padding-left: 50px;
 }
 
-.game-board {
-    min-height: 18em;
+.score-card {
+    min-height: 2.5em;
     opacity: 0.97;
     transition: opacity .5s .3s, height 1s;
     overflow: hidden;
+    padding: 1em;
 }
 
-.game-round {
-    text-align: center;
+.score-card h4 {
     text-transform: uppercase;
+    width: 45%;
+}
+
+h4.game-round {
+    text-align: right;
+    float: right;
+}
+
+h4.player-count {
+    text-align: left;
+    float: left;
 }
 
 .count {
@@ -74,19 +86,23 @@ li {
     text-align: center;
     color: rgba(0,0,0,.9);
     font-weight: 800;
-    -webkit-transform: scale(1) rotate(0deg);
-    -moz-transform: scale(1) rotate(0deg);
-    transform: scale(1) rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    transform: rotate(0deg);
     transition: all .5s;
     font-family: 'Gochi Hand', sans-serif;
-    width: 2em;
-    margin: 0.1ex auto 0;
+    width: 200px;
+    margin: 30px;
     line-height: 1em;
+    display: block;
+    background: white;
 
+    height: 200px;
+    border-radius: 20%;
 }
 
 
-.score-card {
+.game-board {
     min-height: 400px;
     min-width: 400px;
     background: #efeacd url("../images/paper.jpg");
@@ -98,7 +114,7 @@ li {
     transition: all .25s;
 }
 
-.score-card li {
+.game-board li {
     padding: 0 1em;
     color: rgba(18, 60, 122, 0.99);
     height: 85px;
@@ -108,7 +124,7 @@ li {
     position: relative;
 }
 
-.score-card .current {
+.game-board .current {
     color: rgba(0,0,0,0.8);
     margin-left: 1em;
     transition: all .25s;
@@ -119,10 +135,10 @@ li {
 }
 
 .new-user {
-    margin: 0 0 0 220px;
+    
 }
 
-.score-card input {
+.game-board input {
     height: 75px;
     border-width: 0 0 2px 0;
     border-style: dotted;
@@ -133,11 +149,11 @@ li {
     
 }
 
-.score-card input,
-.score-card button {
+.game-board input,
+.game-board button {
     font-size: 20px;
     line-height: 40px;
-    padding: 5px 20px;
+    padding: 20px;
     margin: 0 10px 10px;
 }
 
@@ -162,6 +178,7 @@ li {
 button.play {
     opacity: 1;
     display: block;
+    margin: 1em auto;
     
 }
 
@@ -194,6 +211,7 @@ video, canvas {
 /* No media query since this is the default size we're working up from */
 
 /* Small devices (tablets, 768px and up) */
+
 @media (min-width: 768px) { 
         button.play{
         display: block;
@@ -211,18 +229,22 @@ video, canvas {
 
 /* Large devices (large desktops, 1200px and up) */
 @media (min-width: 1200px) { 
-    .game-board {
-        width: 60%;
+    button.play {
+        width: 20%;
         float: left;
+        margin-left: 20px;
     }
+
     .score-card {
-        width: 35%;
+        width: 60%;
         float: right;
     }
+    
     .photos {
         position: absolute;
         left: 0;
         top: 100px;
+        display: none;
     }
 }
 
@@ -233,12 +255,12 @@ button:focus {
     transition: all .2s;
 }
 
-.score-card .new-user input:focus {
+.game-board .new-user input:focus {
     outline: none;
     color: rgb(207, 20, 20);
 }
 
-body .game-board {
+body .score-card {
     -webkit-filter: blur(0px);
     -moz-filter: blur(0px);
     -webkit-transition: all .2s;
@@ -249,7 +271,7 @@ body.init {
     
 }
 
-.bier .game-board {
+.bier .score-card {
     -webkit-filter: blur(5px);
     -moz-filter: blur(5px);
     -webkit-transition: all .2s;
@@ -264,8 +286,8 @@ body.init {
     
 }
 
-.init .game-board {
-    height: 0;
+.init .score-card {
+    
     /* opacity: 0.0; */
     transition: all 0;
 }
@@ -278,10 +300,11 @@ body.init {
 }
 
 .rolling .dice-number {
-    -webkit-transform: scale(0.5) rotate(0deg);
-    -moz-transform: scale(0.5) rotate(0deg);
-    transform: scale(0.5) rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    transform: rotate(0deg);
     transition: all .2s;
+    
 }
 
 .rolling button.play {
@@ -289,8 +312,8 @@ body.init {
 }
 
 .bier .dice-number {
-    -webkit-transform: scale(1.5) rotate(720deg);
-    -moz-transform: scale(1.5) rotate(720deg);
-    transform: scale(1.5) rotate(720deg);
+    -webkit-transform: rotate(720deg);
+    -moz-transform: rotate(720deg);
+    transform: rotate(720deg);
     transition: all .5s;
 }
