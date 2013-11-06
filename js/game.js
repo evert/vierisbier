@@ -187,12 +187,12 @@ $(function()
         // Save all of the players under a dedicated namespace.
         localStorage: new Backbone.LocalStorage("vierisbier"),
 
-        // Filter down the list of all players that are finished.
+        // Filter down the list of all players that are finished,
+        // regardless whether they are paused or not.
         done: function()
         {
             return this.where({
-                done: true,
-                paused: false
+                done: true
             });
         },
 
@@ -488,7 +488,6 @@ $(function()
         {
             var done = this.collection.done().length;
             var remaining = this.collection.remaining().length;
-
 
             if (this.collection.length)
             {
