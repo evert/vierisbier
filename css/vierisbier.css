@@ -8,6 +8,7 @@ body {
     margin: 0;
     padding: 0;
     cursor: context-menu;
+
 }
 
 .container {
@@ -21,7 +22,7 @@ body {
 h1 {
     text-align: center;
     color: rgba(0,0,0,.8);
-    font-family: 'Gloria Hallelujah';
+    font-family: 'Gloria Hallelujah', sans-serif;
     margin: 0;
     padding: 48px 0 0 0;
     line-height: 80px;
@@ -78,7 +79,7 @@ li {
     -moz-transform: scale(1) rotate(0deg);
     transform: scale(1) rotate(0deg);
     transition: all .5s;
-    font-family: 'Gochi Hand';
+    font-family: 'Gochi Hand', sans-serif;
     width: 2em;
     margin: 0.1ex auto 0;
     line-height: 1em;
@@ -92,7 +93,7 @@ li {
     background: #efeacd url("../images/paper.jpg");
     padding: 0;
     font-size: 200%;
-    font-family: 'Gochi Hand';
+    font-family: 'Gochi Hand', sans-serif;
     border-radius: 5px;
     box-shadow: 0px 1px 10px black;
     transition: all .25s;
@@ -128,7 +129,7 @@ li {
     border-style: dotted;
     border-color: rgba(0,0,0,0.4);
     background: transparent;
-    font-family: "Gloria Hallelujah";
+    font-family: "Gloria Hallelujah", sans-serif;
     color: rgb(6, 18, 65);
     
 }
@@ -161,17 +162,33 @@ li {
 
 button.play {
     opacity: 1;
+    display: block;
+    
 }
 
 #player-list {
-    height: 340px!important;
+    max-height: 340px!important;
     overflow: auto;
     transition: all .2s;
 }
 
 .photos {
-    height: 0!important;
-    transition: all .2s .2s;
+    height: 120px;
+    background: black;
+}
+
+video, canvas {
+    height: 120px;
+    width: 120px;
+    opacity: 0;
+    transition: all .3s 2s;
+}
+
+.user-media video,
+.user-media  canvas {
+        opacity: 1; 
+        transition: all .3s 2s;      
+    }
 }
 
 /* Extra small devices (phones, up to 480px) */
@@ -179,6 +196,12 @@ button.play {
 
 /* Small devices (tablets, 768px and up) */
 @media (min-width: 768px) { 
+        button.play{
+        display: block;
+        margin: 1em auto;
+        padding: 1em;
+        width: 50%;
+    }
 
 }
 
@@ -196,6 +219,11 @@ button.play {
     .score-card {
         width: 35%;
         float: right;
+    }
+    .photos {
+        position: absolute;
+        left: 0;
+        top: 100px;
     }
 }
 
@@ -234,7 +262,7 @@ body.init {
 }
 
 .bier #player-list {
-    height: 0;
+    
 }
 
 .init .game-board {
@@ -258,7 +286,7 @@ body.init {
 }
 
 .rolling button.play {
-    opacity: 0;
+    
 }
 
 .bier .dice-number {
