@@ -123,12 +123,12 @@ $(function()
                     // tough luck, check if user is paused
                     if (!this.currentPlayer.get('paused'))
                     {
-                        // show fail response
+                        // get fail response
                         response = this.responses.random(false);
                     }
                     else
                     {
-                        // the user is paused so show coma fail response
+                        // the user is paused so get coma fail response
                         // instead
                         response = this.responses.random(false, true);
                     }
@@ -162,13 +162,17 @@ $(function()
         // Toggle the `done` state of the player.
         toggle: function()
         {
-            this.save({done: !this.get("done")});
+            this.save({
+                done: !this.get("done")
+            });
         },
 
         // Toggle the `paused` state of the player.
         pause: function()
         {
-            this.save({paused: !this.get("paused")})
+            this.save({
+                paused: !this.get("paused")
+            })
         }
 
     });
@@ -232,7 +236,7 @@ $(function()
     // The DOM element for a player
     var PlayerView = Backbone.View.extend(
     {
-        tagName:  "li",
+        tagName: "li",
 
         // Cache the template function for a single player
         template: _.template($('#player-template').html()),
@@ -260,8 +264,8 @@ $(function()
         // Re-render the titles of the player item.
         render: function()
         {
-            console.log('render update for player:', this.model.get('name'));
-            
+            console.info('render update for player:', this.model.get('name'));
+
             // render template with injected model data
             this.$el.html(this.template(this.model.toJSON()));
 
@@ -321,14 +325,14 @@ $(function()
             this.model.pause();
         },
 
-        // Switch this view into `"editing"` mode, displaying the input field.
+        // Switch this view into `editing` mode, displaying the input field.
         edit: function()
         {
             this.$el.addClass("editing");
             this.input.focus();
         },
 
-        // Close the `"editing"` mode, saving changes to the player.
+        // Close the `editing` mode, saving changes to the player.
         close: function()
         {
             var value = this.input.val();
@@ -374,7 +378,7 @@ $(function()
             return {
                 // general one-liner supporting interpolation for the player data using
                 // '%(name)s', see http://www.diveintojavascript.com/projects/javascript-sprintf
-                description: "Thanks %(name)s...",
+                description: "Thanks %(name)s, what a great %(score)s...",
                 // boolean indicating whether the response should be used for a victory or
                 // not.
                 victory: false,
