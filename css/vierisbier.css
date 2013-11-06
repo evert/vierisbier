@@ -3,7 +3,7 @@
 
 body {
     font-family: sans-serif;
-    background: #8e4f05 url("../images/wood-texture.jpg") no-repeat;
+    background: #8e4f05;
     background-size: cover;
     margin: 0;
     padding: 0;
@@ -105,7 +105,7 @@ h4.player-count {
 .game-board {
     min-height: 400px;
     min-width: 400px;
-    background: #efeacd url("../images/paper.jpg");
+    background: #efeacd;
     padding: 0;
     font-size: 200%;
     font-family: 'Gochi Hand', sans-serif;
@@ -213,24 +213,22 @@ video, canvas {
 /* Small devices (tablets, 768px and up) */
 
 @media (min-width: 768px) { 
-        button.play{
-        display: block;
-        margin: 1em auto;
-        padding: 1em;
-        width: 50%;
-    }
 
 }
 
 /* Medium devices (desktops, 992px and up) */
 @media (min-width: 992px) { 
-
+    body {
+        background-image: url("../images/wood-texture.jpg") no-repeat;
+    }
+    .game-board {
+        background-image: url("../images/paper.jpg");
+    }
 }
 
 /* Large devices (large desktops, 1200px and up) */
 @media (min-width: 1200px) { 
     button.play {
-        width: 20%;
         float: left;
         margin-left: 20px;
     }

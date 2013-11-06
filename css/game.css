@@ -15,7 +15,8 @@ body {
 }
 
 .round-response {
-	color: #1BD161;
+	text-align: center;
+	height: 2em;
 }
 
 #vierisbierapp input[type="text"] {
