@@ -3,8 +3,8 @@ define([
   'jquery',
   'underscore',
   'backbone',
-  'views/menu',
-], function(module, $, _, Backbone, mainMenuView){
+  'views/game',
+], function(module, $, _, Backbone, gameView){
 
   var AppRouter = Backbone.Router.extend(
   {
@@ -33,8 +33,8 @@ define([
 		  //hashChange: true
 	  });
 
-	  // render main menu
-	  mainMenuView.render();
+	  // start game
+	  gameView.render();
   };
 
   return {
