@@ -30,13 +30,13 @@ $(function()
         initialize: function(options)
         {
             this.players = options.players;
+            this.responses = options.responses;
             this.model = new Game();
         },
 
         // Play a game round
         roll: function()
         {   
-            // set root game node class to playing.
             // set round number for game
             this.model.set('round', this.model.get('round') + 1);
             this.$('.game-round .count').text(this.model.get('round'));
@@ -93,13 +93,14 @@ $(function()
                     // triggers 'change' event that re-renders the row
                     if (!this.currentPlayer.get('paused'))
                     {
+                        // increment player score with 1
                         this.currentPlayer.save({
                             "score": this.currentPlayer.get("score") + 1
                         });
                     }
                     else
                     {
-                        // unfortunately the user is paused
+                        // unfortunately the user is paused so
                         // don't add score
                     }
                 }
@@ -239,28 +240,31 @@ $(function()
             if (!this.model.get('paused'))
             {
                 // user isn't paused
-                console.log(
+                /*console.log(
                     "TODO: highlight the player row for action by adding css class or something for player:",
                     this.model.get('name')
-                );
+                );*/
             }
             else
             {
                 // user is paused
-                console.log(
+                /*console.log(
                     "TODO: dim the player row for pause by adding css class or something for player:",
                     this.model.get('name')
-                );
-
+                );*/
             }
-            $("#player-list li").each(function() {
+
+            // remove 'playing' class for all player elements
+            $("#player-list li").each(function()
+            {
                 $(this).removeClass('playing');
             });
+
+            // add 'playing' class for current player element
             this.$el.toggleClass('playing');
-            console.log(this.$el)
+
+            // animated scroll to player element in list
             $('#player-list').scrollTo(this.$el, 500);
-            
-            
         },
 
         // Toggle the `done` state of the model.
@@ -288,6 +292,7 @@ $(function()
             var value = this.input.val();
             if (!value)
             {
+                // remove item and destroy model
                 this.clear();
             }
             else
@@ -314,13 +319,51 @@ $(function()
 
     });
 
+    // Response Model
+    // ------------
+
+    var Response = Backbone.Model.extend(
+    {
+        // Default attributes for the response.
+        defaults: function()
+        {
+            return {
+                description: "Description..",
+            };
+        },
+
+        // get the response with the player's name interpolated.
+        response: function(player)
+        {
+            return this.get('description');
+        }
+
+    });
+
+    // Responses Collection
+    // ------------------
+
+    var ResponsesList = Backbone.Collection.extend(
+    {
+
+        // Reference to this collection's model.
+        model: Response,
+
+        // Get a random response.
+        randomResponse: function()
+        {
+            // return a single random item from the collection.
+            return this.sample();
+        },
+
+    });
+
     // The Application
     // ---------------
 
     // Our overall AppView is the top-level piece of UI.
     var AppView = Backbone.View.extend(
     {
-
         // Instead of generating a new element, bind to the existing skeleton of
         // the App already present in the HTML.
         el: $("body"),
@@ -330,8 +373,8 @@ $(function()
 
         // Delegated events for creating new items, and clearing completed ones.
         events: {
-            "keypress #new-player":       "createOnEnter",
-            "keypress":                   "createOnSpace",
+            "keypress #new-player":     "createOnEnter",
+            "keypress":                 "createOnSpace",
             "click #clear-completed":   "clearCompleted",
             "click #toggle-all":        "toggleAllComplete",
             "click .play":              "playRound",
@@ -345,6 +388,7 @@ $(function()
             this.input = this.$("#new-player");
             this.allCheckbox = this.$("#toggle-all")[0];
 
+            // setup and listen to players collection
             this.collection = Players;
             this.listenTo(this.collection, 'add', this.addOne);
             this.listenTo(this.collection, 'reset', this.addAll);
@@ -353,10 +397,15 @@ $(function()
             this.footer = this.$('footer');
             this.main = $('#main');
 
+            // setup responses collection
+            this.responses = new ResponsesList;
+
+            // initialize the game
             this.game = new GameView({
                 players: this.collection
             });
 
+            // fetch players collection (from local storage)
             this.collection.fetch();
         },
 
@@ -371,11 +420,13 @@ $(function()
             {
                 this.main.show();
                 this.footer.show();
-                this.footer.html(this.statsTemplate({done: done, remaining: remaining}));
+                this.footer.html(this.statsTemplate({
+                    done: done,
+                    remaining: remaining
+                }));
             }
             else
             {
-                //this.main.hide();
                 this.footer.hide();
             }
 
@@ -387,6 +438,8 @@ $(function()
         addOne: function(player)
         {
             var view = new PlayerView({model: player});
+    
+            // add to dom
             this.$("#player-list").append(view.render().el);
         },
 
@@ -403,6 +456,7 @@ $(function()
             if (e.keyCode != 13) return;
             if (!this.input.val()) return;
 
+            // add new player
             this.collection.create({name: this.input.val()});
             this.input.val('');
         },

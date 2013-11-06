@@ -18,7 +18,7 @@
 
 <body class="init">
 
-    <div class="container" id="vierisbierapp">
+    <div id="vierisbierapp" class="container">
 
         <section id="main">
             <input id="toggle-all" type="checkbox">
@@ -46,7 +46,9 @@
                 <!--
                     Ideally these elements aren't created until it's confirmed that the 
                     client supports video/camera, but for the sake of illustrating the 
-                    elements involved, they are created with markup (not JavaScript)
+                    elements involved, they are created with markup (not JavaScript).
+
+                    XXX: Thijs: in that case move it to a 'text/template' below
                 -->
                 <video id="video" width="640" height="480" autoplay></video>
                 <button class="snap">Snap Photo</button>
