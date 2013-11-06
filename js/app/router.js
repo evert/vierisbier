@@ -34,7 +34,7 @@ define([
 	  });
 
 	  // render main menu
-	  mainMenuView.render(category);
+	  mainMenuView.render();
   };
 
   return {

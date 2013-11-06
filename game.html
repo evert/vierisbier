@@ -6,9 +6,6 @@
         <meta charset="utf-8">
 
         <link rel="stylesheet" href="css/vierisbier.css" type="text/css" />
-        <!--
-        <script type="text/javascript" src="js/vierisbier.js"></script> 
-        --> 
         <link rel="stylesheet" href="css/game.css" type="text/css" />
         
     </head>
@@ -70,8 +67,22 @@
 
         <!-- Templates -->
 
-        <script id="menu_template" type="text/template">
-            <a href="<%= item.get('href') %>" alt="<%= item.get('alt') %>"><%= item.get('name') %></a>
+        <script type="text/template" id="player-template">
+            <div class="view">
+                <input class="toggle" title="Done" type="checkbox" <%= done ? 'checked="checked"' : '' %> />
+                <input class="paused" title="Paused" type="checkbox" <%= paused ? 'checked="checked"' : '' %> />
+                
+                <label><%= name %> <span class="score"><%= score %></span></label>
+                <a class="destroy"></a>
+            </div>
+            <input class="edit" type="text" value="<%=  name %>" />
+        </script>
+
+        <script type="text/template" id="stats-template">
+            <% if (done) { %>
+                <a id="clear-completed">Clear <%= done %> completed <%= done == 1 ? 'player' : 'players' %></a>
+            <% } %>
+            <div class="player-count"><b><%= remaining %></b> active <%= remaining == 1 ? 'player' : 'players' %></div>
         </script>
 
         <script src="js/libs/require-min.js" data-main="js/app.js"></script>

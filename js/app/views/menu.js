@@ -1,10 +1,13 @@
 define([
   'module',
   'jquery',
+  'jqueryScrollTo',
   'underscore',
   'backbone',
-  'backboneLocalstorage'
-], function(module, $, _, Backbone, BackboneLocalStorage){
+  'backboneLocalstorage',
+  'sprintf'
+], function(module, $, jqueryScrollTo, _, Backbone, BackboneLocalStorage,
+	        sprintf){
 
 	// Game Model
     // ------------
