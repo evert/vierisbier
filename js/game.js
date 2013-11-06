@@ -61,6 +61,9 @@ $(function()
             this.$el.addClass("rolling").removeClass('bier');
             this.$("button.play").attr('disabled', 'disabled');
 
+            // reset response
+            this.$(".round-response").text('');
+
             // start roll dice animation    
             this.interval = setInterval(_.bind(this._rollDice, this), 80);
         },
@@ -71,40 +74,69 @@ $(function()
             this.model.set('countDown', this.model.get('countDown') - 1);
 
             // throw dice and get random nr
-            this.lastNumber = _.random(1,6);
+            this.lastNumber = _.random(4, 6);
 
             // update view with random nr
             this.$('.dice-number').text(this.lastNumber);
 
+            // animation ended
             if (this.model.get('countDown') == 0)
             {
+                // stop animation
+                clearInterval(this.interval);
                 this.$el.removeClass("rolling");
+
+                // disable ui
                 this.$("button.play").attr('disabled', null);
 
-                clearInterval(this.interval);
-                
-                // won
-                if (this.lastNumber == 4)
+                var response;
+
+                // 4 = beer
+                if (4 == this.lastNumber)
                 {
-                    // hoera
+                    // show animation
                     this.$el.toggleClass('bier');
-                    
-                    // update user model's points + 1 when he's not paused
-                    // triggers 'change' event that re-renders the row
+
+                    // check if user is paused
                     if (!this.currentPlayer.get('paused'))
                     {
-                        // increment player score with 1
-                        this.currentPlayer.save({
+                        // get victorious response
+                        response = this.responses.random(true);
+
+                        // update user model's points + 1 when he's not paused
+                        // triggers 'change' event that re-renders the player's row
+                        this.currentPlayer.save(
+                        {
                             "score": this.currentPlayer.get("score") + 1
                         });
                     }
                     else
                     {
                         // unfortunately the user is paused so
-                        // don't add score
+                        // don't add score. get coma victorious response
+                        // instead
+                        response = this.responses.random(true, true);
+                    }
+                }
+                else
+                {
+                    // tough luck, check if user is paused
+                    if (!this.currentPlayer.get('paused'))
+                    {
+                        // show fail response
+                        response = this.responses.random(false);
+                    }
+                    else
+                    {
+                        // the user is paused so show coma fail response
+                        // instead
+                        response = this.responses.random(false, true);
                     }
                 }
 
+                // show response with player data
+                response = response.toString(this.currentPlayer);
+                this.$(".round-response").text(response);
             }
         },
 
@@ -171,7 +203,11 @@ $(function()
         // GUID in the database. This generates the next order number for new items.
         nextOrder: function()
         {
-            if (!this.length) return 1;
+            if (!this.length)
+            {
+                return 1;
+            }
+
             return this.last().get('order') + 1;
         },
 
@@ -206,7 +242,7 @@ $(function()
         },
 
         // The view listens for changes to its model, re-rendering. Since there's
-        // a one-to-one correspondence between a **Player** and a **PlayerView** in this
+        // a one-to-one correspondence between a Player and a PlayerView in this
         // app, we set a direct reference on the model for convenience.
         initialize: function()
         {
@@ -297,7 +333,9 @@ $(function()
             }
             else
             {
+                // save player (changes)
                 this.model.save({name: value});
+
                 this.$el.removeClass("editing");
             }
         },
@@ -328,14 +366,30 @@ $(function()
         defaults: function()
         {
             return {
-                description: "Description..",
+                // general one-liner supporting interpolation for the player data using
+                // '%(name)s', see http://www.diveintojavascript.com/projects/javascript-sprintf
+                description: "Thanks %(name)s...",
+                // boolean indicating whether the response should be used for a victory or
+                // not.
+                victory: false,
+                // boolean indicating whether the response happened in a paused state or
+                // not.
+                paused: false
             };
         },
 
-        // get the response with the player's name interpolated.
-        response: function(player)
+        // get the response with the player's data interpolated.
+        toString: function(player)
         {
-            return this.get('description');
+            var responseString = this.get('description');
+
+            // interpolate the player data if it's available
+            if (!_.isUndefined(player))
+            {
+                responseString = sprintf(responseString, player.attributes);
+            }
+
+            return responseString;
         }
 
     });
@@ -350,10 +404,21 @@ $(function()
         model: Response,
 
         // Get a random response.
-        randomResponse: function()
+        random: function(victory, paused)
         {
+            if (_.isUndefined(victory))
+            {
+                victory = false;
+            }
+            if (_.isUndefined(paused))
+            {
+                paused = false;
+            }
             // return a single random item from the collection.
-            return this.sample();
+            return _.sample(this.where({
+                victory: victory,
+                paused: paused
+            }));
         },
 
     });
@@ -382,7 +447,7 @@ $(function()
 
         // At initialization we bind to the relevant events on the Players
         // collection, when items are added or changed. Kick things off by
-        // loading any preexisting todos that might be saved in *localStorage*.
+        // loading any preexisting todos that might be saved in localStorage.
         initialize: function()
         {
             this.input = this.$("#new-player");
@@ -399,10 +464,12 @@ $(function()
 
             // setup responses collection
             this.responses = new ResponsesList;
+            this._createSomeResponses();
 
             // initialize the game
             this.game = new GameView({
-                players: this.collection
+                players: this.collection,
+                responses: this.responses
             });
 
             // fetch players collection (from local storage)
@@ -464,7 +531,7 @@ $(function()
         // If you hit spacebar, play new round
         createOnSpace: function(e) 
         {
-            if ($('#new-player').is(":focus"))
+            if (this.$('#new-player').is(":focus"))
             {
                 return;
             } 
@@ -484,16 +551,52 @@ $(function()
         clearCompleted: function()
         {
             _.invoke(this.collection.done(), 'destroy');
+
             return false;
         },
 
         toggleAllComplete: function ()
         {
             var done = this.allCheckbox.checked;
+
+            // save all players
             this.collection.each(function (player)
             {
                 player.save({'done': done});
             });
+        },
+
+        // add some test responses
+        _createSomeResponses: function()
+        {
+            // some responses that should be coming from a database at startup
+            // or something
+            this.responses.add([
+                {
+                    // won and not paused
+                    description: "Keep em coming %(name)s!",
+                    victory: true,
+                    paused: false
+                },
+                {
+                    // didn't win and not paused
+                    description: "Go home %(name)s!",
+                    victory: false,
+                    paused: false
+                },
+                {
+                    // won but paused
+                    description: "You won %(name)s, but you're asleep?!",
+                    victory: true,
+                    paused: true
+                },
+                {
+                    // didn't win and also paused
+                    description: "Tough luck, and %(name)s is in coma anyway...",
+                    victory: false,
+                    paused: true
+                }
+            ]);
         }
 
     });

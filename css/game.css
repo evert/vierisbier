@@ -14,7 +14,9 @@ body {
 
 }
 
-
+.round-response {
+	color: #1BD161;
+}
 
 #vierisbierapp input[type="text"] {
 	outline: none;
