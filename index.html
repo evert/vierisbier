@@ -1,39 +1,100 @@
-<head>
-    <title>Vier is Bier</title>
-    <script type="text/javascript" src="jquery-1.6.4.min.js"></script>
-    <script type="text/javascript" src="vierisbier.js"></script>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Vier is Bier</title>
+        <meta name="viewport" content="width=device-width, initial-scale=.8, maximum-scale=.8, user-scalable=0"/> <!--320-->
 
-    <link rel="stylesheet" href="vierisbier.css" type="text/css" />
-</head>
+        <meta charset="utf-8">
+
+        <link rel="stylesheet" href="css/vierisbier.css" type="text/css" />
+        <link rel="stylesheet" href="css/game.css" type="text/css" />
+
+    </head>
 
 
-<body>
+    <body class="init">
 
-    <div class="container">
-        <h1>Vier is bier!</h1>
+        <div id="vierisbierapp" class="container">
 
-        <section class="game-board">
-            <div class="number">4</div>
-            <button class="roll">Roll</button>
-        </section>
+            <section id="main">
+               
+                
 
-        <div class="users">
-            <div class="newuser">
-                <input type="text" name="username" class="new-user" placeholder="Add player.." />
-                <button type="submit" />Add</button>
-            </div>
+                <div class="game-board">
+                    <h1>Vier is bier!</h1>
+                    <h2 class="round-response"></h2>   
+                    <button class="play">ROLL DICE <div class="dice-number">4</div></button>
 
-            <ul>
+                    <section class="score-card">
+                        
+                        <h4 class="player-count"><span class="count"></span> Players</h4>
+                        <h4 class="game-round">Round <span class="count">0</span></h4>
 
-            </ul>
-            
+                        <div class="player-list">
+                            <div class="new-user">
+                                <input id="new-player" type="text" name="username" placeholder="Add player.." value=""/>
+                                <button type="submit" tabindex="-1" />+</button>
+                            </div>
+
+                            <ol id="player-list"> 
+                            </ol>
+                        </div>  
+                    
+                    </section>
+                    <div style="clear:both"></div>
+                    
+                    
+                    
+                    <div class="photos">
+                        <!--
+                            Ideally these elements aren't created until it's confirmed that the 
+                            client supports video/camera, but for the sake of illustrating the 
+                            elements involved, they are created with markup (not JavaScript).
+
+                            XXX: Thijs: in that case let's move it to a 'text/template'
+                                        below and create a new view for it.
+                        -->
+                        <video id="video" width="120" height="120" autoplay></video>
+                        <button class="snap">Snap Photo</button>
+                        <canvas id="canvas" width="120" height="120"></canvas>
+                    </div>
+                </div>
+
+
+            </section>
+
+            <footer>
+                <a id="clear-completed">Clear completed</a>
+            </footer>
+
+            <section id="instructions">
+                <input id="toggle-all" type="checkbox">
+                <label for="toggle-all">Mark all as complete</label>
+            </section>
+
         </div>
 
-        <br style="clear:both" />
-    </div>
+        <!-- Templates -->
 
-    <div class="bier">
-        BIER!!!!!
-    </div>
+        <script type="text/template" id="player-template">
+            <div class="view">
+                <input class="toggle" title="Done" type="checkbox" <%= done ? 'checked="checked"' : '' %> />
+                <input class="paused" title="Paused" type="checkbox" <%= paused ? 'checked="checked"' : '' %> />
+                
+                <label><%= name %> <span class="score"><%= score %></span></label>
+                <a class="destroy"></a>
+            </div>
+            <input class="edit" type="text" value="<%=  name %>" />
+        </script>
 
-</body>
+            <script type="text/template" id="stats-template">
+            <% if (done) { %>
+                <a id="clear-completed">Clear <%= done %> completed <%= done == 1 ? 'player' : 'players' %></a>
+            <% } %>
+            <span class="count"><%= remaining %></span> active <%= remaining == 1 ? 'player' : 'players' %>
+        </script>
+
+        <script src="js/libs/require-min.js" data-main="js/app.js"></script>
+
+    </body>
+</html>

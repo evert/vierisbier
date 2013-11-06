@@ -1,0 +1,317 @@
+/*@import url(http://fonts.googleapis.com/css?family=Gochi+Hand);
+@import url(http://fonts.googleapis.com/css?family=Gloria+Hallelujah);*/
+
+body {
+    font-family: sans-serif;
+    background: #8e4f05;
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+    cursor: default;
+    background-position: -100px 0;
+}
+
+.container {
+    width: 90%;
+    border-radius: 0;
+    padding: 1% 4%;
+    margin: 30px auto 0;
+    height: 100%;
+} 
+
+h1 {
+    text-align: center;
+    color: rgba(0,0,0,.8);
+    font-family: 'Gloria Hallelujah', sans-serif;
+    margin: 0;
+    padding: 18px 0 0 0;
+    line-height: 80px;
+}
+
+button {
+    background: black;
+    border: none;
+    border-radius: 0.5ex;
+    color: white;
+    transition: all .2s;
+} 
+
+input {
+    cursor: auto;
+}
+
+ol {
+    padding: 0 180px;
+    margin: 0;
+    list-style-position: outside;
+}
+
+li {
+    padding-left: 50px;
+}
+
+.score-card {
+    min-height: 2.5em;
+    opacity: 0.97;
+    transition: opacity .5s .3s, height 1s;
+    overflow: hidden;
+    padding: 1em;
+}
+
+.score-card h4 {
+    text-transform: uppercase;
+    width: 45%;
+}
+
+h4.game-round {
+    text-align: right;
+    float: right;
+}
+
+h4.player-count {
+    text-align: left;
+    float: left;
+}
+
+.count {
+    background: rgba(0,0,0,0.7);
+    color: #dedede;
+    padding: 0.5ex 1.3ex;
+    border-radius: 0.5ex;
+}
+
+.dice-number {
+    font-size: 10em;
+    text-shadow: rgba(255,255,255, 0.4) 0px 1px 0px;
+    text-align: center;
+    color: rgba(0,0,0,.9);
+    font-weight: 800;
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    transform: rotate(0deg);
+    transition: all .5s;
+    font-family: 'Gochi Hand', sans-serif;
+    width: 200px;
+    margin: 30px;
+    line-height: 1em;
+    display: block;
+    background: white;
+
+    height: 200px;
+    border-radius: 20%;
+}
+
+
+.game-board {
+    min-height: 400px;
+    min-width: 400px;
+    background: #efeacd;
+    padding: 0;
+    font-size: 200%;
+    font-family: 'Gochi Hand', sans-serif;
+    border-radius: 5px;
+    box-shadow: 0px 1px 10px black;
+    transition: all .25s;
+}
+
+.game-board li {
+    padding: 0 1em;
+    color: rgba(18, 60, 122, 0.99);
+    height: 85px;
+    line-height: 78px;
+    text-shadow: none;
+    transition: all .25s;
+    position: relative;
+}
+
+.game-board .current {
+    color: rgba(0,0,0,0.8);
+    margin-left: 1em;
+    transition: all .25s;
+}
+
+.score {
+    float: right;
+}
+
+.new-user {
+    
+}
+
+.game-board input {
+    height: 75px;
+    border-width: 0 0 2px 0;
+    border-style: dotted;
+    border-color: rgba(0,0,0,0.4);
+    background: transparent;
+    font-family: "Gloria Hallelujah", sans-serif;
+    color: rgb(6, 18, 65);
+    
+}
+
+.game-board input,
+.game-board button {
+    font-size: 20px;
+    line-height: 40px;
+    padding: 20px;
+    margin: 0 10px 10px;
+}
+
+.new-user button {
+    opacity: 0;
+    transition: all .2s;
+}
+
+.new-user.minimized input {
+    width: 0;
+    padding: 5px 0;
+    opacity: 0;
+    border: none;
+    transition: all .7s;
+}
+
+.new-user.minimized button {
+    opacity: 1;
+    transition: all .2s;
+}
+
+button.play {
+    opacity: 1;
+    display: block;
+    margin: 1em auto;
+    
+}
+
+#player-list {
+    max-height: 340px!important;
+    overflow: auto;
+    transition: all .2s;
+}
+
+.photos {
+    height: 120px;
+    background: black;
+}
+
+video, canvas {
+    height: 120px;
+    width: 120px;
+    opacity: 0;
+    transition: all .3s 2s;
+}
+
+.user-media video,
+.user-media  canvas {
+        opacity: 1; 
+        transition: all .3s 2s;      
+    }
+}
+
+/* Extra small devices (phones, up to 480px) */
+/* No media query since this is the default size we're working up from */
+
+/* Small devices (tablets, 768px and up) */
+
+@media (min-width: 768px) { 
+
+}
+
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: 992px) { 
+    body {
+        background-image: url("../images/wood-texture.jpg") no-repeat;
+    }
+    .game-board {
+        background-image: url("../images/paper.jpg");
+    }
+}
+
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) { 
+    button.play {
+        float: left;
+        margin-left: 20px;
+    }
+
+    .score-card {
+        width: 60%;
+        float: right;
+    }
+    
+    .photos {
+        position: absolute;
+        left: 0;
+        top: 100px;
+        display: none;
+    }
+}
+
+/* Screen transitions */
+
+button:focus {
+    background: #B63333;
+    transition: all .2s;
+}
+
+.game-board .new-user input:focus {
+    outline: none;
+    color: rgb(207, 20, 20);
+}
+
+body .score-card {
+    -webkit-filter: blur(0px);
+    -moz-filter: blur(0px);
+    -webkit-transition: all .2s;
+    transition: all 1s;
+}
+
+body.init {
+    
+}
+
+.bier .score-card {
+    -webkit-filter: blur(5px);
+    -moz-filter: blur(5px);
+    -webkit-transition: all .2s;
+    transition: all 1s;
+}
+
+.bier .photos {
+    height: 540px;
+}
+
+.bier #player-list {
+    
+}
+
+.init .score-card {
+    
+    /* opacity: 0.0; */
+    transition: all 0;
+}
+
+.bier .current {
+    -webkit-transform: scale(1.2);
+    text-shadow: 13px 11px 9px rgba(0,0,0,0.5)!important;
+    margin-left: 2em!important;
+    transition: all .5s;
+}
+
+.rolling .dice-number {
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    transform: rotate(0deg);
+    transition: all .2s;
+    
+}
+
+.rolling button.play {
+    
+}
+
+.bier .dice-number {
+    -webkit-transform: rotate(720deg);
+    -moz-transform: rotate(720deg);
+    transform: rotate(720deg);
+    transition: all .5s;
+}
