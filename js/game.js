@@ -35,7 +35,8 @@ $(function()
 
         // Play a game round
         roll: function()
-        {
+        {   
+            // set root game node class to playing.
             // set round number for game
             this.model.set('round', this.model.get('round') + 1);
             this.$('.game-round .count').text(this.model.get('round'));
@@ -56,7 +57,11 @@ $(function()
             // set countdown for animation interval
             this.model.set('countDown', 10);
 
-            // start roll dice animation
+            // set root node class to rolling, hide PLAY button with css accordingly
+            this.$el.addClass("rolling").removeClass('bier');
+            this.$("button.play").attr('disabled', 'disabled');
+
+            // start roll dice animation    
             this.interval = setInterval(_.bind(this._rollDice, this), 80);
         },
 
@@ -66,21 +71,23 @@ $(function()
             this.model.set('countDown', this.model.get('countDown') - 1);
 
             // throw dice and get random nr
-            this.lastNumber = _.random(4, 5);
+            this.lastNumber = _.random(1,6);
 
             // update view with random nr
             this.$('.dice-number').text(this.lastNumber);
 
             if (this.model.get('countDown') == 0)
             {
-                // this.$el.removeClass("rolling");
+                this.$el.removeClass("rolling");
+                this.$("button.play").attr('disabled', null);
+
                 clearInterval(this.interval);
                 
                 // won
                 if (this.lastNumber == 4)
                 {
                     // hoera
-                    this.$('.container').toggleClass('bier');
+                    this.$el.toggleClass('bier');
                     
                     // update user model's points + 1 when he's not paused
                     // triggers 'change' event that re-renders the row
@@ -95,7 +102,8 @@ $(function()
                         // unfortunately the user is paused
                         // don't add score
                     }
-                } 
+                }
+
             }
         },
 
@@ -243,7 +251,15 @@ $(function()
                     "TODO: dim the player row for pause by adding css class or something for player:",
                     this.model.get('name')
                 );
+
             }
+            $("#player-list li").each(function() {
+                $(this).removeClass('playing');
+            });
+            this.$el.toggleClass('playing');
+            console.log(this.$el)
+            $('#player-list').scrollTo(this.$el, 500);
+            
             
         },
 
@@ -314,7 +330,7 @@ $(function()
 
         // Delegated events for creating new items, and clearing completed ones.
         events: {
-            "keypress #new-todo":       "createOnEnter",
+            "keypress #new-player":       "createOnEnter",
             "keypress":                   "createOnSpace",
             "click #clear-completed":   "clearCompleted",
             "click #toggle-all":        "toggleAllComplete",
@@ -326,7 +342,7 @@ $(function()
         // loading any preexisting todos that might be saved in *localStorage*.
         initialize: function()
         {
-            this.input = this.$("#new-todo");
+            this.input = this.$("#new-player");
             this.allCheckbox = this.$("#toggle-all")[0];
 
             this.collection = Players;
@@ -371,7 +387,7 @@ $(function()
         addOne: function(player)
         {
             var view = new PlayerView({model: player});
-            this.$("#todo-list").append(view.render().el);
+            this.$("#player-list").append(view.render().el);
         },
 
         // Add all items in the Players collection at once.
@@ -394,7 +410,7 @@ $(function()
         // If you hit spacebar, play new round
         createOnSpace: function(e) 
         {
-            if ($('#new-todo').is(":focus"))
+            if ($('#new-player').is(":focus"))
             {
                 return;
             } 

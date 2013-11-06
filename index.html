@@ -7,6 +7,7 @@
 --> 
     <link rel="stylesheet" href="css/game.css" type="text/css" />
     <script type="text/javascript" src="js/libs/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="js/libs/jquery.scrollTo-min.js"></script>
     <script type="text/javascript" src="js/libs/underscore-min.js"></script>
     <script type="text/javascript" src="js/libs/backbone-min.js"></script>
     <script type="text/javascript" src="js/libs/backbone.localStorage.js"></script>
@@ -29,18 +30,31 @@
             </section>
 
             <div class="score-card">
+
                 <h1>Vier is bier!</h1>
+                <div class="player-list">
+                    <div class="new-user">
+                        <input id="new-player" type="text" name="username" placeholder="Add player.." value=""/>
+                        <button type="submit" tabindex="-1" />+</button>
+                    </div>
 
-                <div class="new-user">
-                    <input id="new-todo" type="text" name="username" placeholder="Add player.." value=""/>
-                    <button type="submit" tabindex="-1" />+</button>
+                    <ol id="player-list"> 
+                    </ol>
                 </div>
-
-                <ol id="todo-list"> 
-                </ol>
-
                 <button class="play">PLAY</button>
+                 <div class="photos">
+                <!--
+                    Ideally these elements aren't created until it's confirmed that the 
+                    client supports video/camera, but for the sake of illustrating the 
+                    elements involved, they are created with markup (not JavaScript)
+                -->
+                <video id="video" width="640" height="480" autoplay></video>
+                <button class="snap">Snap Photo</button>
+                <canvas id="canvas" width="640" height="480"></canvas>
             </div>
+            </div>
+
+           
 
         </section>
 

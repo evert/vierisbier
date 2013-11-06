@@ -7,6 +7,7 @@ body {
     background-size: cover;
     margin: 0;
     padding: 0;
+    cursor: context-menu;
 }
 
 .container {
@@ -33,6 +34,10 @@ button {
     color: white;
     transition: all .2s;
 } 
+
+input {
+    cursor: auto;
+}
 
 ol {
     padding: 0 180px;
@@ -77,6 +82,7 @@ li {
     width: 2em;
     margin: 0.1ex auto 0;
     line-height: 1em;
+
 }
 
 
@@ -153,6 +159,21 @@ li {
     transition: all .2s;
 }
 
+button.play {
+    opacity: 1;
+}
+
+#player-list {
+    height: 340px!important;
+    overflow: auto;
+    transition: all .2s;
+}
+
+.photos {
+    height: 0!important;
+    transition: all .2s .2s;
+}
+
 /* Extra small devices (phones, up to 480px) */
 /* No media query since this is the default size we're working up from */
 
@@ -201,11 +222,19 @@ body.init {
     
 }
 
-body.bier .game-board {
+.bier .game-board {
     -webkit-filter: blur(5px);
     -moz-filter: blur(5px);
     -webkit-transition: all .2s;
     transition: all 1s;
+}
+
+.bier .photos {
+    height: 540px;
+}
+
+.bier #player-list {
+    height: 0;
 }
 
 .init .game-board {
@@ -226,6 +255,10 @@ body.bier .game-board {
     -moz-transform: scale(0.5) rotate(0deg);
     transform: scale(0.5) rotate(0deg);
     transition: all .2s;
+}
+
+.rolling button.play {
+    opacity: 0;
 }
 
 .bier .dice-number {

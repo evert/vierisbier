@@ -7,7 +7,6 @@ body {
 body {
 	font: 14px "Helvetica Neue", Helvetica, Arial, sans-serif;
 	line-height: 1.4em;
-
 	-webkit-font-smoothing: antialiased;
 }
 
@@ -27,30 +26,38 @@ body {
 	
 }
 
-#todo-list {
+#player-list {
 	margin: 0px 0 10px 180px;
 	padding: 0;
 	
 }
 
-#todo-list li {
+#player-list li {
 
 }
 
-#todo-list li:last-child {
+#player-list li.playing {
+	background: rgba(255,255,255,0.4);
+}
+
+#player-list li:last-child {
 	border-bottom: none;
 }
 
-#todo-list li.done label {
+#player-list li.done label {
 	color: #777777;
 	text-decoration: line-through;
 }
 
-#todo-list li.paused label {
+#player-list li.paused.playing {
+	background: rgba(255,255,255,0.2);
+}
+
+#player-list li.paused label {
 	color: #aaaaaa;
 }
 
-#todo-list .destroy {
+#player-list .destroy {
 	position: absolute;
 	left: -35px;
 	top: 30px;
@@ -61,25 +68,25 @@ body {
 	background: url(../images/destroy.png) no-repeat;
 }
 
-#todo-list li:hover .destroy {
+#player-list li:hover .destroy {
   	display: block;
 }
 
-#todo-list .destroy:hover {
+#player-list .destroy:hover {
   	background-position: 0 -20px;
 }
 
-#todo-list li.editing {
+#player-list li.editing {
 	border-bottom: none;
 	margin-top: -1px;
 	padding: 0;
 }
 
-#todo-list li.editing:last-child {
+#player-list li.editing:last-child {
 	margin-bottom: -1px;
 }
 
-#todo-list li.editing .edit {
+#player-list li.editing .edit {
 	display: block;
 	width: 444px;
 	padding: 0!important;
@@ -87,15 +94,15 @@ body {
 	margin: 0;
 }
 
-#todo-list li.editing .view {
-	display: none;
+#player-list li.editing .view label{
+	display: none; 
 }
 
-#todo-list li .view label {
+#player-list li .view label {
 	word-break: break-word;
 }
 
-#todo-list li .edit {
+#player-list li .edit {
 	display: none;
 }
 
