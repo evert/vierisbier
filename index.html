@@ -2,15 +2,16 @@
     <title>Vier is Bier</title>
 
     <link rel="stylesheet" href="css/vierisbier.css" type="text/css" />
-<!--
+    <!--
     <script type="text/javascript" src="js/vierisbier.js"></script> 
---> 
+    --> 
     <link rel="stylesheet" href="css/game.css" type="text/css" />
     <script type="text/javascript" src="js/libs/jquery-1.10.2.min.js"></script>
     <script type="text/javascript" src="js/libs/jquery.scrollTo-min.js"></script>
     <script type="text/javascript" src="js/libs/underscore-min.js"></script>
     <script type="text/javascript" src="js/libs/backbone-min.js"></script>
     <script type="text/javascript" src="js/libs/backbone.localStorage.js"></script>
+    <script type="text/javascript" src="js/libs/sprintf.min.js"></script>
     <script type="text/javascript" src="js/libs/davidwalsh.camera.js"></script>
     <script type="text/javascript" src="js/game.js"></script>
     
@@ -19,15 +20,14 @@
 
 <body class="init">
 
-    <div class="container" id="vierisbierapp">
+    <div id="vierisbierapp" class="container">
 
         <section id="main">
-            <input id="toggle-all" type="checkbox">
-            <label for="toggle-all">Mark all as complete</label>
            
             <section class="game-board">
                 <h4 class="game-round">Round: <span class="count">0</span></h4>
                 <div class="dice-number">4</div>
+                <h2 class="round-response"></h2>
             </section>
 
             <div class="score-card">
@@ -43,40 +43,41 @@
                     </ol>
                 </div>
                 <button class="play">PLAY</button>
-                 <div class="photos">
-                <!--
-                    Ideally these elements aren't created until it's confirmed that the 
-                    client supports video/camera, but for the sake of illustrating the 
-                    elements involved, they are created with markup (not JavaScript)
-                -->
-                <video id="video" width="120" height="120" autoplay></video>
-                <button class="snap">Snap Photo</button>
-                <canvas id="canvas" width="120" height="120"></canvas>
-            </div>
+                <div class="photos">
+                    <!--
+                        Ideally these elements aren't created until it's confirmed that the 
+                        client supports video/camera, but for the sake of illustrating the 
+                        elements involved, they are created with markup (not JavaScript).
+
+                        XXX: Thijs: in that case let's move it to a 'text/template'
+                                    below and create a new view for it.
+                    -->
+                    <video id="video" width="120" height="120" autoplay></video>
+                    <button class="snap">Snap Photo</button>
+                    <canvas id="canvas" width="120" height="120"></canvas>
+                </div>
             </div>
 
-           
 
         </section>
 
         <footer>
             <a id="clear-completed">Clear completed</a>
-            <div id="todo-count"></div>
         </footer>
 
+        <section id="instructions">
+            <input id="toggle-all" type="checkbox">
+            <label for="toggle-all">Mark all as complete</label>
+        </section>
+
     </div>
-
-    <div id="instructions">
-    </div>
-
-
 
     <!-- Templates -->
 
     <script type="text/template" id="player-template">
         <div class="view">
-            <input class="toggle" type="checkbox" <%= done ? 'checked="checked"' : '' %> />
-            <input class="paused" type="checkbox" <%= paused ? 'checked="checked"' : '' %> />
+            <input class="toggle" title="Done" type="checkbox" <%= done ? 'checked="checked"' : '' %> />
+            <input class="paused" title="Paused" type="checkbox" <%= paused ? 'checked="checked"' : '' %> />
             
             <label><%= name %> <span class="score"><%= score %></span></label>
             <a class="destroy"></a>
@@ -85,11 +86,10 @@
     </script>
 
     <script type="text/template" id="stats-template">
-    <% if (done) { %>
-        <a id="clear-completed">Clear <%= done %> completed <%= done == 1 ? 'player' : 'player' %></a>
-    <% } %>
-        <div class="todo-count"><b><%= remaining %></b> <%= remaining == 1 ? 'player' : 'players' %></div>
+        <% if (done) { %>
+            <a id="clear-completed">Clear <%= done %> completed <%= done == 1 ? 'player' : 'players' %></a>
+        <% } %>
+        <div class="player-count"><b><%= remaining %></b> active <%= remaining == 1 ? 'player' : 'players' %></div>
     </script>
-
 
 </body>
