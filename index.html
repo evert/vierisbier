@@ -2,7 +2,6 @@
 <html lang="en">
     <head>
         <title>Vier is Bier</title>
-        <meta charset="utf-8">
 
         <link rel="stylesheet" href="css/vierisbier.css" type="text/css" />
         <!--
@@ -27,25 +26,33 @@
 
             <section id="main">
                
-                <section class="game-board">
-                    <h4 class="game-round">Round: <span class="count">0</span></h4>
-                    <div class="dice-number">4</div>
-                    <h2 class="round-response"></h2>
-                </section>
+                
 
-                <div class="score-card">
-
+                <div class="game-board">
                     <h1>Vier is bier!</h1>
-                    <div class="player-list">
-                        <div class="new-user">
-                            <input id="new-player" type="text" name="username" placeholder="Add player.." value=""/>
-                            <button type="submit" tabindex="-1" />+</button>
-                        </div>
+                    
+                    <button class="play">ROLL DICE <div class="dice-number">4</div></button>
 
-                        <ol id="player-list"> 
-                        </ol>
-                    </div>
-                    <button class="play">PLAY</button>
+                    <section class="score-card">
+                        
+                        <h4 class="player-count"><span class="count"></span> Players</h4>
+                        <h4 class="game-round">Round <span class="count">0</span></h4>
+
+                        <div class="player-list">
+                            <div class="new-user">
+                                <input id="new-player" type="text" name="username" placeholder="Add player.." value=""/>
+                                <button type="submit" tabindex="-1" />+</button>
+                            </div>
+
+                            <ol id="player-list"> 
+                            </ol>
+                        </div>  
+                    
+                    </section>
+                    <div style="clear:both"></div>
+                    <h2 class="round-response"></h2>   
+                    
+                    
                     <div class="photos">
                         <!--
                             Ideally these elements aren't created until it's confirmed that the 
@@ -88,12 +95,13 @@
             <input class="edit" type="text" value="<%=  name %>" />
         </script>
 
-        <script type="text/template" id="stats-template">
+            <script type="text/template" id="stats-template">
             <% if (done) { %>
                 <a id="clear-completed">Clear <%= done %> completed <%= done == 1 ? 'player' : 'players' %></a>
             <% } %>
-            <div class="player-count"><b><%= remaining %></b> active <%= remaining == 1 ? 'player' : 'players' %></div>
+            <span class="count"><%= remaining %></span> active <%= remaining == 1 ? 'player' : 'players' %>
         </script>
+
 
     </body>
 </html>

@@ -37,7 +37,8 @@ $(function()
         // Play a game round
         roll: function()
         {   
-            // set round number for game
+            // set round number for game, incrementing by 1
+            // TODO: round numbers increases after everybody's had a turn?
             this.model.set('round', this.model.get('round') + 1);
             this.$('.game-round .count').text(this.model.get('round'));
 
@@ -469,7 +470,9 @@ $(function()
             this.listenTo(this.collection, 'reset', this.addAll);
             this.listenTo(this.collection, 'all', this.render);
 
-            this.footer = this.$('footer');
+            // TODO: footer here is only used to pass the number of players. 
+            // move to div.score-card 
+            
             this.main = $('#main');
 
             // setup responses collection
@@ -496,15 +499,17 @@ $(function()
             if (this.collection.length)
             {
                 this.main.show();
-                this.footer.show();
+                $('.player-count .count').text(remaining);
+                /*
                 this.footer.html(this.statsTemplate({
                     done: done,
                     remaining: remaining
                 }));
+*/
             }
             else
             {
-                this.footer.hide();
+                //this.footer.hide();
             }
 
             this.allCheckbox.checked = !remaining;
