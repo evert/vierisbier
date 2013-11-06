@@ -76,8 +76,8 @@
 
     <script type="text/template" id="player-template">
         <div class="view">
-            <input class="toggle" alt="foo" type="checkbox" <%= done ? 'checked="checked"' : '' %> />
-            <input class="paused" type="checkbox" <%= paused ? 'checked="checked"' : '' %> />
+            <input class="toggle" title="Done" type="checkbox" <%= done ? 'checked="checked"' : '' %> />
+            <input class="paused" title="Paused" type="checkbox" <%= paused ? 'checked="checked"' : '' %> />
             
             <label><%= name %> <span class="score"><%= score %></span></label>
             <a class="destroy"></a>
