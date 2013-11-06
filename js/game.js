@@ -74,7 +74,7 @@ $(function()
             this.model.set('countDown', this.model.get('countDown') - 1);
 
             // throw dice and get random nr
-            this.lastNumber = _.random(4, 6);
+            this.lastNumber = _.random(1, 6);
 
             // update view with random nr
             this.$('.dice-number').text(this.lastNumber);
